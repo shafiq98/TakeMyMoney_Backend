@@ -2,11 +2,11 @@ package com.TakeMyMoney.service.services;
 
 import com.TakeMyMoney.service.entities.Address;
 import com.TakeMyMoney.service.entities.User;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import org.springframework.stereotype.Service;
 
 import java.security.SecureRandom;
 import java.time.LocalDateTime;
+import java.util.UUID;
 
 @Service
 public class AddressService {
@@ -22,6 +22,7 @@ public class AddressService {
     }
 
     public static boolean checkAddressValidity(Address address){
+        // TODO actually test validity of pin in pinRepository
         return true;
     }
 }

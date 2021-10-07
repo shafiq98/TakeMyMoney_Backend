@@ -10,7 +10,7 @@ public class TransactionController {
 
     TransactionService transactionService = new TransactionService();
 
-    @PostMapping(path = "/makeTransaction")
+    @PostMapping(path = "/transaction")
     public ResponseEntity<Boolean> makeTransaction(@RequestBody Transaction transaction){
         return ResponseEntity.ok(transactionService.makeTransaction(transaction));
     }

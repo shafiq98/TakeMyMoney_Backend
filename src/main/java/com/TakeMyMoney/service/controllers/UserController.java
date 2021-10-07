@@ -19,8 +19,9 @@ public class UserController {
 
     @GetMapping
     public ResponseEntity<User> WhoAmI() {
+        // no args constructor returns Shafiq, balance 1500 ALL THE TIME
+        // TODO fix this
         User tempUser = userService.createUser();
-
         return ResponseEntity.ok(tempUser);
     };
 

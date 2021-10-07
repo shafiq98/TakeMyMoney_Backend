@@ -43,7 +43,7 @@ public class CryptoService {
         return null;
     }
 
-    // TODO change decrypt to accept an Address object
+    // TODO change decrypt to return an Address object
     public static String decrypt(String strToDecrypt) {
         try {
             byte[] iv = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
@@ -62,4 +62,6 @@ public class CryptoService {
         }
         return null;
     }
+
+    // TODO Look into SealedObjects
 }
