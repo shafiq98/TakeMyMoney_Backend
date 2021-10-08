@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.math.BigDecimal;
+import java.util.UUID;
 
 @Slf4j
 @RestController
@@ -23,6 +24,10 @@ public class UserController {
         // TODO fix this
         User tempUser = userService.createUser();
         return ResponseEntity.ok(tempUser);
+    };
+    @GetMapping(path = "/{id}")
+    public ResponseEntity<User> WhoAmI(@PathVariable UUID userID) {
+        return ResponseEntity.ok(userService.getUser(userID));
     };
 
     @GetMapping(path = "/UserToAddress")

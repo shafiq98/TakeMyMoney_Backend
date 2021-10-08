@@ -5,13 +5,17 @@ import com.TakeMyMoney.service.entities.User;
 import com.TakeMyMoney.service.services.AddressService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RestController;
 
+import java.util.UUID;
+
+@RestController("/api/v1/addresses")
 public class AddressController {
 
     AddressService addressService = new AddressService();
 
-    @GetMapping(path="/address")
-    public ResponseEntity<String> getMyAddress(User user){
-        return ResponseEntity.ok(addressService.UserToAddress(user).toString());
+    @GetMapping()
+    public ResponseEntity<String> getMyAddress(UUID uuid){
+        return ResponseEntity.ok(addressService.UserToAddress(uuid).toString());
     }
 }

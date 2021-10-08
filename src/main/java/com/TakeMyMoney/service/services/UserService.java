@@ -27,6 +27,17 @@ public class UserService {
         return null;
     }
 
+    public User getUser(UUID userID){
+        User tempUser;
+        for (int i = 0; i <= users.size(); i++){
+            if (users.get(i).getId() == userID){
+                tempUser = users.get(i);
+                return tempUser;
+            }
+        }
+        return null;
+    }
+
 
     public User createUser(){
         User tempUser = User.builder()
