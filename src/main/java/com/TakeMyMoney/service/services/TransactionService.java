@@ -10,7 +10,8 @@ public class TransactionService {
 
     UserService userService = new UserService();
 
-    public boolean makeTransaction(Transaction transaction){
+    // TODO add exceptions to be thrown
+    public User makeTransaction(Transaction transaction){
 
         // decrypt encrypted address string
         Address decryptedAddress = CryptoService.decrypt(transaction.getEncryptedDestinationAddress());
@@ -18,13 +19,13 @@ public class TransactionService {
         // Check validity of destination address
         if (!AddressService.checkAddressValidity(decryptedAddress)){
             // TODO throw exception here
-            return false;
+            return null;
         }
         // make deduction first
         User payer = transaction.getPayer();
         boolean deductionResult = userService.makeDeduction(payer, transaction.getAmount());
         if (!deductionResult){
-            return false;
+            return null;
         }
 
         // make deposit to destination
@@ -34,8 +35,10 @@ public class TransactionService {
             depositResult = userService.makeDeposit(destinationUser, transaction.getAmount());
         }
 
-        // TODO create repository to store transactions history
-        return depositResult;
+        if (depositResult){
+            return userService.getUser(destinationUser.getId());
+        }
+        return null;
     }
 
 }
