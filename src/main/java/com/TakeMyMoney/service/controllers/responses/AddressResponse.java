@@ -1,4 +1,4 @@
-package com.TakeMyMoney.service.controllers.requests;
+package com.TakeMyMoney.service.controllers.responses;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -7,6 +7,6 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class AddressRequest {
-    private String token;
+public class AddressResponse {
+    private String addressToken;
 }
