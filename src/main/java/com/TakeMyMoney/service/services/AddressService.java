@@ -1,76 +1,54 @@
 package com.TakeMyMoney.service.services;
 
 import com.TakeMyMoney.service.entities.Address;
-import com.TakeMyMoney.service.entities.User;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.EnableScheduling;
-import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
 import java.security.SecureRandom;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
+import java.util.stream.Collectors;
 
+@Slf4j
 @Service
 @EnableScheduling
 public class AddressService {
 
-    private List<SecureRandom> pinList = new ArrayList<SecureRandom>();
+    @Autowired
+    private UserService userService;
 
+    private List<Address> addressList = new ArrayList<>();
 
-    // TODO check whether iPhone will send an entire User object or just the userID?
-    // If only userID, then how is the application supposed to retrieve that id? does the user have to input it during login or smth?
-    public Address UserToAddress(User user){
-
-        SecureRandom userPin = new SecureRandom();
-        LocalDateTime now = LocalDateTime.now();
-
-        pinList.add(userPin);
-
-
+    public Address generateAddress(UUID userID) {
         Address address = Address.builder()
-                .id(user.getId())
-                .timestamp(now)
-                .pin(userPin)
+                .id(userID)
+                .timestamp(LocalDateTime.now())
+                .pin(new SecureRandom())
                 .build();
-
+        addressList.add(address);
         return address;
     }
 
-    public Address UserToAddress(UUID userID){
-        UserService userService = new UserService();
-
-        User user = userService.getUser(userID);
-        SecureRandom userPin = new SecureRandom();
-        LocalDateTime now = LocalDateTime.now();
-
-        pinList.add(userPin);
-
-
-        Address address = Address.builder()
-                .id(user.getId())
-                .timestamp(now)
-                .pin(userPin)
-                .build();
-
-        return address;
+    public void removePin(LocalDateTime now) {
+        addressList.stream().filter(address -> address.getTimestamp().isBefore(now)).forEach(address -> {
+            log.info(Thread.currentThread().getName() + " The removal of userPin : " + address.getPin() + " executed at " + LocalDateTime.now());
+        });
+        addressList = addressList.stream().filter(address -> address.getTimestamp().isAfter(now)).collect(Collectors.toList());
     }
 
-    // TODO check if this scheduler removes items every 5 minutes after a pin is inserted
-    @Scheduled(fixedRate = 5000)
-    public void removePin(SecureRandom expiredPin){
-        System.out.println(Thread.currentThread().getName()+" The removal of userPin : " + expiredPin.toString() + " executed at "+ LocalDateTime.now());
-        try {
-            pinList.remove(expiredPin);
-        } catch (Exception e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
+    public boolean checkAddressValidity(String token) {
+        List<String> addresses = Arrays.stream(CryptoService.decrypt(token).split("=")).collect(Collectors.toList());
+        String secureRandom = addresses.get(2);
+        Optional<Address> addressOptional = addressList.stream().filter(address -> address.getPin().toString().equals(secureRandom)).findFirst();
+        return addressOptional.isPresent();
     }
 
-    public static boolean checkAddressValidity(Address address){
-        // TODO actually test validity of pin in pinRepository
-        return true;
+    public Address getAddress(String token) {
+        List<String> addresses = Arrays.stream(CryptoService.decrypt(token).split("=")).collect(Collectors.toList());
+        String secureRandom = addresses.get(2);
+        Optional<Address> addressOptional = addressList.stream().filter(address -> address.getPin().toString().equals(secureRandom)).findFirst();
+        return addressOptional.orElse(null);
     }
 }

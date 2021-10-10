@@ -9,7 +9,7 @@ import java.math.BigDecimal;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class UserRequest {
-    private String name;
-    private BigDecimal balance;
+public class TransactionRequest {
+    private String token;
+    private BigDecimal value;
 }

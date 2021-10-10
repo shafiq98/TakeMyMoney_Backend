@@ -1,6 +1,5 @@
 package com.TakeMyMoney.service.services;
 
-import com.TakeMyMoney.service.entities.Address;
 import org.springframework.stereotype.Service;
 
 import javax.crypto.Cipher;
@@ -11,9 +10,7 @@ import javax.crypto.spec.PBEKeySpec;
 import javax.crypto.spec.SecretKeySpec;
 import java.nio.charset.StandardCharsets;
 import java.security.spec.KeySpec;
-import java.time.LocalDateTime;
 import java.util.Base64;
-
 
 // taken from https://howtodoinjava.com/java/java-security/aes-256-encryption-decryption/
 // TODO look for improvements needed to functions

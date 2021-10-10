@@ -1,21 +1,23 @@
 package com.TakeMyMoney.service.controllers;
 
-import com.TakeMyMoney.service.entities.Address;
-import com.TakeMyMoney.service.entities.User;
+import com.TakeMyMoney.service.controllers.authentication.UserContext;
+import com.TakeMyMoney.service.controllers.responses.AddressResponse;
 import com.TakeMyMoney.service.services.AddressService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.UUID;
-
-@RestController("/api/v1/addresses")
+@RestController
+@RequestMapping("/api/v1/address")
 public class AddressController {
 
-    AddressService addressService = new AddressService();
+    @Autowired
+    private AddressService addressService;
 
-    @GetMapping()
-    public ResponseEntity<String> getMyAddress(UUID uuid){
-        return ResponseEntity.ok(addressService.UserToAddress(uuid).toString());
+    @GetMapping
+    public ResponseEntity<AddressResponse> generateAddress() {
+        return ResponseEntity.ok(new AddressResponse(addressService.generateAddress(UserContext.getUser().getId()).toString()));
     }
 }
