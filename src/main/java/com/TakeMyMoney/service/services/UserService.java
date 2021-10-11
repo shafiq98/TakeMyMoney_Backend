@@ -23,6 +23,11 @@ public class UserService {
         return optionalUser.orElse(null);
     }
 
+    public String getUserName(UUID userId) {
+        Optional<User> optionalUser = users.stream().filter(user -> user.getId().equals(userId)).findFirst();
+        return optionalUser.get().getName();
+    }
+
     public User getUser(String name) {
         Optional<User> optionalUser = users.stream().filter(user -> user.getName().toLowerCase().equals(name.toLowerCase())).findFirst();
         return optionalUser.orElse(null);

@@ -37,6 +37,13 @@ public class UserController {
         return ResponseEntity.ok(userService.getUser(address.getId()));
     }
 
+    // NOTE this only returns the name of the user
+    @GetMapping(path="/name")
+    public ResponseEntity<String> getUserName(@RequestBody AddressRequest addressRequest) {
+        Address address = addressService.getAddress(addressRequest.getToken());
+        return ResponseEntity.ok(userService.getUserName(address.getId()));
+    }
+
     @PostMapping
     public ResponseEntity<User> CreateUser(@RequestBody UserRequest userRequest) {
         return ResponseEntity.ok(userService.createUser(UserRequestToUser(userRequest)));
