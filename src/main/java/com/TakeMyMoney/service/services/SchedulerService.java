@@ -16,7 +16,7 @@ public class SchedulerService {
 
     // TODO check if this scheduler removes items every 5 minutes after a pin is inserted
     //Use cron instead https://crontab.guru/every-5-minutes
-    @Scheduled(cron = "*/60 * * * * *")
+    @Scheduled(cron = "*/600 * * * * *")
     public void pinScheduler() {
         LocalDateTime now = LocalDateTime.now();
         log.info("[Scheduler] Running at: " + now.toString());

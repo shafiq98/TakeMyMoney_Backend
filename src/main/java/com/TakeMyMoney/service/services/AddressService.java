@@ -28,6 +28,7 @@ public class AddressService {
                 .pin(new SecureRandom())
                 .build();
         addressList.add(address);
+        // should the scheduled remover be placed here?
         return address;
     }
 
@@ -45,10 +46,33 @@ public class AddressService {
         return addressOptional.isPresent();
     }
 
+//    public Address getAddress(String token) {
+////        System.out.println("Address List: ");
+////        System.out.println(addressList);
+//        List<String> addresses = Arrays.stream(token.split("=")).collect(Collectors.toList());
+//        String secureRandom = addresses.get(2);
+//        Optional<Address> addressOptional = addressList.stream().filter(address -> address.getPin().toString().equals(secureRandom)).findFirst();
+//        return addressOptional.orElse(null);
+//    }
+
     public Address getAddress(String token) {
-        List<String> addresses = Arrays.stream(CryptoService.decrypt(token).split("=")).collect(Collectors.toList());
-        String secureRandom = addresses.get(2);
-        Optional<Address> addressOptional = addressList.stream().filter(address -> address.getPin().toString().equals(secureRandom)).findFirst();
-        return addressOptional.orElse(null);
+
+        String targetAddress = token;
+        System.out.println("Raw Token : " + targetAddress);
+
+        System.out.println("Address List : " + addressList);
+
+        for (int i=0; i<addressList.size(); i++){
+            Address tempAddress = addressList.get(i);
+            System.out.println("Temp Address toString() : " + tempAddress.toString());
+            if (Objects.equals(tempAddress.toString(), token)){
+                return tempAddress;
+            }
+        }
+        return null;
+    }
+
+    public List<Address> getAllAddress(){
+        return addressList;
     }
 }

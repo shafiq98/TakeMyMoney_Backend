@@ -11,6 +11,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @Slf4j
 @RestController
 @RequestMapping("/api/v1/users")
@@ -21,6 +23,13 @@ public class UserController {
 
     @Autowired
     private AddressService addressService;
+
+    // NOTE: Function is only here for debugging
+    @GetMapping(path="/allUsers")
+    public ResponseEntity<List<User>> getUsers(){
+        List<User> users = userService.getUsers();
+        return ResponseEntity.ok(users);
+    }
 
     @GetMapping
     public ResponseEntity<User> getUser(@RequestBody AddressRequest addressRequest) {

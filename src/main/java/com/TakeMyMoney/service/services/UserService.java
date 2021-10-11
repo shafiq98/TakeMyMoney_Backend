@@ -14,6 +14,10 @@ public class UserService {
 
     private final List<User> users = new ArrayList<>();
 
+    public List<User> getUsers(){
+        return users;
+    }
+
     public User getUser(UUID userId) {
         Optional<User> optionalUser = users.stream().filter(user -> user.getId().equals(userId)).findFirst();
         return optionalUser.orElse(null);

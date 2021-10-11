@@ -16,8 +16,6 @@ public class Transaction {
     private SecureRandom transactionID;
 
     @ManyToMany
-    private User payer;
-    @ManyToMany
     private String encryptedDestinationAddress;
 
     private BigDecimal amount;

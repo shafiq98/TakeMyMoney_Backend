@@ -22,7 +22,8 @@ public class Address {
     @Override
     public String toString() {
         String result = String.format("%s=%s=%s", id.toString(), timestamp.toString(), pin.toString());
-        String encryptedString = CryptoService.encrypt(result);
+//        String encryptedString = CryptoService.encrypt(result);
+        String encryptedString = result;
         return encryptedString;
     }
 
