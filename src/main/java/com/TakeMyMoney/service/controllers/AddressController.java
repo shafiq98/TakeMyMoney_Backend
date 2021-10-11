@@ -4,6 +4,7 @@ import com.TakeMyMoney.service.controllers.authentication.UserContext;
 import com.TakeMyMoney.service.controllers.responses.AddressResponse;
 import com.TakeMyMoney.service.entities.Address;
 import com.TakeMyMoney.service.services.AddressService;
+import com.TakeMyMoney.service.services.CryptoService;
 import org.apache.coyote.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -23,7 +24,7 @@ public class AddressController {
 
     @GetMapping
     public ResponseEntity<AddressResponse> generateAddress() {
-        return ResponseEntity.ok(new AddressResponse(addressService.generateAddress(UserContext.getUser().getId()).toString()));
+        return ResponseEntity.ok(new AddressResponse(CryptoService.encrypt(addressService.generateAddress(UserContext.getUser().getId()).toString())));
     }
 
     @GetMapping(path="/allAddresses")

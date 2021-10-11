@@ -57,15 +57,15 @@ public class AddressService {
 
     public Address getAddress(String token) {
 
-        String targetAddress = token;
-        System.out.println("Raw Token : " + targetAddress);
+        String decryptedAddress = CryptoService.decrypt(token);
+        System.out.println("Raw Token : " + decryptedAddress);
 
         System.out.println("Address List : " + addressList);
 
         for (int i=0; i<addressList.size(); i++){
             Address tempAddress = addressList.get(i);
             System.out.println("Temp Address toString() : " + tempAddress.toString());
-            if (Objects.equals(tempAddress.toString(), token)){
+            if (Objects.equals(tempAddress.toString(), decryptedAddress)){
                 return tempAddress;
             }
         }
