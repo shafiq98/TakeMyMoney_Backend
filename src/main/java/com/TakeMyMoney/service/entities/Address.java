@@ -19,6 +19,9 @@ public class Address {
     private LocalDateTime timestamp;
     private SecureRandom pin;
 
+    // TODO add additional String encryptedString to hold toString() attribute for easier checking
+
+    // rename toString() to maybe toEncryptedString()
     @Override
     public String toString() {
         String result = String.format("%s=%s=%s", id.toString(), timestamp.toString(), pin.toString());

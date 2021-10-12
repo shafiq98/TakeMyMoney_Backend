@@ -1,0 +1,20 @@
+Problem Statement 
+
+When does the problem arise?
+-> QR Codes may be troublesome to scan when in harsh lighting
+-> Users may not want to share their phone numbers for money transfer
+	
+Who does this affect?
+-> People who use contactless payment regularly
+-> Users who care about their personal information being made publicly available
+
+Current Solutions
+-> PayNow (using NRIC, UEN, etc)
+-> Not as seamless as we want it to be for close contact payment transfers & arguably still not as secure and private as we want it to be
+
+
+Aims & Objectives
+-> To build a dependable contactless payment system that completes transfers securely, while requiring the lowest amount of user interaction possible
+	dependable -> not affected by harsh lighting, or mistyping phone numbers, etc
+	securely -> users address is useless after the first 5 minutes unlike NRIC, phone number, etc which is permanent
+	lowest amount of user interaction -> just stand near the person you want to transfer to to complete a transfer

@@ -3,15 +3,19 @@ package com.TakeMyMoney.service.controllers;
 import com.TakeMyMoney.service.controllers.authentication.UserContext;
 import com.TakeMyMoney.service.controllers.responses.AddressResponse;
 import com.TakeMyMoney.service.entities.Address;
+import com.TakeMyMoney.service.exceptions.BusinessExceptions;
+import com.TakeMyMoney.service.exceptions.users.UserNotLoggedInException;
 import com.TakeMyMoney.service.services.AddressService;
 import com.TakeMyMoney.service.services.CryptoService;
 import org.apache.coyote.Response;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 

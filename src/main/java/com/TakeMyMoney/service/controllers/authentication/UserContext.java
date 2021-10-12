@@ -1,6 +1,7 @@
 package com.TakeMyMoney.service.controllers.authentication;
 
 import com.TakeMyMoney.service.entities.User;
+import com.TakeMyMoney.service.exceptions.users.UserNotLoggedInException;
 
 import java.util.UUID;
 

@@ -11,6 +11,7 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.stereotype.Service;
 
 import java.security.SecureRandom;
+import java.time.Instant;
 import java.time.LocalDateTime;
 import java.util.*;
 import java.util.stream.Collectors;
@@ -28,7 +29,7 @@ public class AddressService {
     public Address generateAddress(UUID userID) {
         Address address = Address.builder()
                 .id(userID)
-                .timestamp(LocalDateTime.now())
+                .timestamp(LocalDateTime.now().plusMinutes(10L))
                 .pin(new SecureRandom())
                 .build();
         addressList.add(address);
@@ -90,14 +91,14 @@ public class AddressService {
         String decryptedAddress = CryptoService.decrypt(token);
 //        String decryptedAddress = token;
         System.out.println("Decrypted Address = " + decryptedAddress);
+        // todo add null check for decryptedaddress
         String pin = decryptedAddress.split("=")[2];
         String timestamp = decryptedAddress.split("=")[1];
         String id = decryptedAddress.split("=")[0];
 
-        for (int i = 0; i< addressList.size(); i++){
-            Address tempAddress = addressList.get(i);
+        for (Address tempAddress : addressList) {
             System.out.println("Temporary Address : " + tempAddress.toString());
-            if (Objects.equals(tempAddress.getId().toString(), id) && Objects.equals(tempAddress.getPin().toString(), pin)){
+            if (Objects.equals(tempAddress.getId().toString(), id) && Objects.equals(tempAddress.getPin().toString(), pin)) {
                 System.out.println("Match Found");
                 return tempAddress;
             }
