@@ -38,20 +38,5 @@ public class UserService {
         return user;
     }
 
-    public boolean makeDeduction(User user, BigDecimal amount) {
-        // 1. Verify amount < balance
-        // 2. Reduce user balance
-        // 3. Return true or false based on whether the change registered
-        return true;
-    }
-
-    public boolean makeDeposit(User user, BigDecimal amount) {
-        // 1. Verify user exists
-        // 2. Verify amount is > 0
-        // 3. Update balance
-        // 4. Return boolean based on outcome
-        return true;
-    }
-
 
 }

@@ -2,6 +2,7 @@ package com.TakeMyMoney.service.controllers;
 
 import com.TakeMyMoney.service.controllers.requests.AddressRequest;
 import com.TakeMyMoney.service.controllers.requests.UserRequest;
+import com.TakeMyMoney.service.controllers.responses.UserResponse;
 import com.TakeMyMoney.service.entities.Address;
 import com.TakeMyMoney.service.entities.User;
 import com.TakeMyMoney.service.services.AddressService;
@@ -31,20 +32,24 @@ public class UserController {
         return ResponseEntity.ok(users);
     }
 
-    @GetMapping
+
+    // TODO change get mapping to post
+    @PostMapping
     public ResponseEntity<User> getUser(@RequestBody AddressRequest addressRequest) {
         Address address = addressService.getAddress(addressRequest.getToken());
         return ResponseEntity.ok(userService.getUser(address.getId()));
     }
 
     // NOTE this only returns the name of the user
-    @GetMapping(path="/name")
-    public ResponseEntity<String> getUserName(@RequestBody AddressRequest addressRequest) {
+    // todo change response type to object
+    @PostMapping(path="/name")
+    public ResponseEntity<UserResponse> getUserName(@RequestBody AddressRequest addressRequest) {
         Address address = addressService.getAddress(addressRequest.getToken());
-        return ResponseEntity.ok(userService.getUserName(address.getId()));
+        User user = userService.getUser(address.getId());
+        return ResponseEntity.ok(new UserResponse(user.getName()));
     }
 
-    @PostMapping
+    @PostMapping(path="/createUser")
     public ResponseEntity<User> CreateUser(@RequestBody UserRequest userRequest) {
         return ResponseEntity.ok(userService.createUser(UserRequestToUser(userRequest)));
     }
@@ -55,4 +60,8 @@ public class UserController {
                 .balance(userRequest.getBalance())
                 .build();
     }
+
+//    private UserResponse UserToUserResponse(User user){
+//        return UserResponse.builder
+//    }
 }

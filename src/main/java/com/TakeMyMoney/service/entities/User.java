@@ -1,5 +1,6 @@
 package com.TakeMyMoney.service.entities;
 
+import com.TakeMyMoney.service.exceptions.users.InsufficientBalanceException;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -30,6 +31,20 @@ public class User {
         if (o == null || getClass() != o.getClass()) return false;
         User user = (User) o;
         return id == user.id;
+    }
+
+    public void withdraw(BigDecimal amount){
+
+        if (balance.compareTo(amount) < 0){
+            throw new InsufficientBalanceException(String.format("userID %s has insufficient balance", id.toString()));
+        }
+        else{
+            balance = balance.subtract(amount);
+        }
+    }
+
+    public void deposit(BigDecimal amount){
+        balance = balance.add(amount);
     }
 
     // TODO implement hashcode function? not sure what its for yet
