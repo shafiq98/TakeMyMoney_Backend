@@ -28,7 +28,7 @@ public class AddressService {
     public Address generateAddress(UUID userID) {
         Address address = Address.builder()
                 .id(userID)
-                .timestamp(LocalDateTime.now())
+                .timestamp(LocalDateTime.now().plusMinutes(10))
                 .pin(new SecureRandom())
                 .build();
         addressList.add(address);
