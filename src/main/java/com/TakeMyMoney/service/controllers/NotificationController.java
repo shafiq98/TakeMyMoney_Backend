@@ -4,6 +4,7 @@ import com.TakeMyMoney.service.services.MessageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.method.annotation.SseEmitter;
@@ -28,7 +29,7 @@ public class NotificationController {
 //        return ResponseEntity.ok(format("%s has unsubscribed to notifications", UserContext.getUsername()));
 //    }
 
-    @PostMapping
+    @GetMapping
     public ResponseEntity<SseEmitter> emitter() {
         return ResponseEntity.ok(messageService.subscribe());
     }

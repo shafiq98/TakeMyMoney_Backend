@@ -51,8 +51,8 @@ public class TransactionService {
 
 //        messageService.sendNotification(
 //                format("You have received $%s from your friend %s", transactionAmount, sender.getName()), receiver.getId());
-        messageService.sendEvent(
-                format("You have received $%s from your friend %s", transactionAmount, sender.getName()), receiver.getId());
+        messageService.sendTransactionEvent(
+                format("You have received $%s from %s", transactionAmount, sender.getName()), receiver.getId());
 
         return sender;
     }
