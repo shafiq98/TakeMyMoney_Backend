@@ -13,6 +13,6 @@ public class ControllerAdvisor{
     @ExceptionHandler(BusinessExceptions.class)
     @ResponseBody
     public ResponseEntity responseMyException(BusinessExceptions e) {
-        return new ResponseEntity(new BusinessExceptionResponse(e.getMessage()), HttpStatus.BAD_REQUEST);
+        return new ResponseEntity(new BusinessExceptionResponse(e.getMessage()), e.getHTTPStatus());
     }
 }
