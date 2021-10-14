@@ -44,7 +44,7 @@ public class MessageService {
 
     public SseEmitter subscribe() {
         log.info(format("subscribing user %s", UserContext.getUsername()));
-        SseEmitter sseEmitter = new SseEmitter();
+        SseEmitter sseEmitter = new SseEmitter(-1L);
         sseEmitterMap.put(UserContext.getUserId(), sseEmitter);
         return sseEmitter;
     }
@@ -65,7 +65,7 @@ public class MessageService {
 //        }
 //    }
 
-    public void sendEvent(String message, UUID userId) {
+    public void sendTransactionEvent(String message, UUID userId) {
         ExecutorService sseMvcExecutor = Executors.newSingleThreadExecutor();
         SseEmitter sseEmitter = sseEmitterMap.get(userId);
         sseMvcExecutor.execute(() -> {
@@ -73,10 +73,10 @@ public class MessageService {
                 SseEmitter.SseEventBuilder event = SseEmitter.event()
                         .data(message)
                         .id(UUID.randomUUID().toString())
-                        .name("sse event - mvc -> " + LocalTime.now().toString());
+                        .name("transaction");
                 sseEmitter.send(event);
             } catch (Exception e) {
-                log.error(format("Unable to send notifications to %s", UserContext.getUsername()));
+                log.error(format("Unable to send notifications to receiver with Id %s", userId));
                 sseEmitter.completeWithError(e);
             }
         });
