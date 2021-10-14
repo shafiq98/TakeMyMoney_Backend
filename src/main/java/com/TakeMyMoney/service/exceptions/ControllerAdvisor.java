@@ -1,5 +1,6 @@
 package com.TakeMyMoney.service.exceptions;
 
+import com.TakeMyMoney.service.controllers.responses.BusinessExceptionResponse;
 import com.TakeMyMoney.service.exceptions.BusinessExceptions;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -12,6 +13,6 @@ public class ControllerAdvisor{
     @ExceptionHandler(BusinessExceptions.class)
     @ResponseBody
     public ResponseEntity responseMyException(BusinessExceptions e) {
-        return new ResponseEntity<Object>(e.getMessage(),HttpStatus.BAD_REQUEST);
+        return new ResponseEntity(new BusinessExceptionResponse(e.getMessage()), HttpStatus.BAD_REQUEST);
     }
 }
