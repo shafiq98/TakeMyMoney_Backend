@@ -10,6 +10,8 @@ import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
 
+import static java.lang.String.format;
+
 
 @Service
 public class TransactionService {
@@ -19,6 +21,9 @@ public class TransactionService {
 
     @Autowired
     private AddressService addressService;
+
+    @Autowired
+    private MessageService messageService;
 
     @Autowired
     private UserService userService;
@@ -37,15 +42,15 @@ public class TransactionService {
         BigDecimal transactionAmount = transaction.getAmount();
 
         if (transactionAmount.compareTo(BigDecimal.ZERO) < 0) {
-            throw new InvalidAmountException(String.format("Sorry, we do not accept negative transaction amounts like $%s", transactionAmount));
+            throw new InvalidAmountException(format("Sorry, we do not accept negative transaction amounts like $%s", transactionAmount));
         }
 
         // TODO check for and throw InsufficientBalanceException
-//        sender.setBalance(sender.getBalance().add(transactionAmount.negate()));;
-//        receiver.setBalance(receiver.getBalance().add(transactionAmount));
         sender.withdraw(transactionAmount);
         receiver.deposit(transactionAmount);
 
+        messageService.sendNotification(
+                format("You have received $%s from your friend %s", transactionAmount, sender.getName()), receiver.getId());
 
         return sender;
     }
