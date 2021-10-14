@@ -49,8 +49,8 @@ public class TransactionService {
         sender.withdraw(transactionAmount);
         receiver.deposit(transactionAmount);
 
-        messageService.sendNotification(
-                format("You have received $%s from your friend %s", transactionAmount, sender.getName()), receiver.getId());
+//        messageService.sendNotification(
+//                format("You have received $%s from your friend %s", transactionAmount, sender.getName()), receiver.getId());
         messageService.sendEvent(
                 format("You have received $%s from your friend %s", transactionAmount, sender.getName()), receiver.getId());
 
