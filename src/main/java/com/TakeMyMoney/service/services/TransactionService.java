@@ -29,7 +29,7 @@ public class TransactionService {
     private UserService userService;
 
     // TODO add exceptions to be thrown
-    public User makeTransaction(Transaction transaction){
+    public User makeTransaction(Transaction transaction) {
 
         User sender = UserContext.getUser();
         String encryptedDestinationAddress = transaction.getEncryptedDestinationAddress();
@@ -50,6 +50,8 @@ public class TransactionService {
         receiver.deposit(transactionAmount);
 
         messageService.sendNotification(
+                format("You have received $%s from your friend %s", transactionAmount, sender.getName()), receiver.getId());
+        messageService.sendEvent(
                 format("You have received $%s from your friend %s", transactionAmount, sender.getName()), receiver.getId());
 
         return sender;

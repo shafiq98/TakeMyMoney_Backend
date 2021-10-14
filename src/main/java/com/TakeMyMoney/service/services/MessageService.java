@@ -9,14 +9,21 @@ import org.bouncycastle.jce.provider.BouncyCastleProvider;
 import org.jose4j.lang.JoseException;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+import org.springframework.web.servlet.mvc.method.annotation.SseEmitter;
+import reactor.core.publisher.Flux;
 
 import javax.annotation.PostConstruct;
 import java.io.IOException;
 import java.security.GeneralSecurityException;
 import java.security.Security;
-import java.util.*;
+import java.time.LocalTime;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.UUID;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ExecutionException;
-import java.util.stream.Collectors;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 import static java.lang.String.format;
 
@@ -31,6 +38,7 @@ public class MessageService {
 
     private PushService pushService;
     private Map<UUID, Subscription> subscriptions = new HashMap<>();
+    private Map<UUID, SseEmitter> sseEmitterMap = new ConcurrentHashMap<>();
 
     @PostConstruct
     private void init() throws GeneralSecurityException {
@@ -38,21 +46,29 @@ public class MessageService {
         pushService = new PushService(publicKey, privateKey);
     }
 
-    public String getPublicKey(){
+    public String getPublicKey() {
         return publicKey;
     }
 
-    public void subscribe(Subscription subscription){
+    public void subscribe(Subscription subscription) {
         log.info(format("subscribing user %s", UserContext.getUsername()));
         this.subscriptions.put(UserContext.getUserId(), subscription);
     }
 
-    public void unsubscribe(){
-        log.info(format("unsubscribing user %s", UserContext.getUsername()));
-        subscriptions.remove(UserContext.getUserId());
+    public SseEmitter subscribe() {
+        log.info(format("subscribing user %s", UserContext.getUsername()));
+        SseEmitter sseEmitter = new SseEmitter();
+        sseEmitterMap.put(UserContext.getUserId(), sseEmitter);
+        return sseEmitter;
     }
 
-    public void sendNotification(String message, UUID userId){
+    public void unsubscribe() {
+        log.info(format("unsubscribing user %s", UserContext.getUsername()));
+//        subscriptions.remove(UserContext.getUserId());
+        sseEmitterMap.remove(UserContext.getUserId());
+    }
+
+    public void sendNotification(String message, UUID userId) {
         try {
             Subscription subscription = subscriptions.get(userId);
             pushService.send(new Notification(subscription, message));
@@ -62,4 +78,20 @@ public class MessageService {
         }
     }
 
+    public void sendEvent(String message, UUID userId) {
+        ExecutorService sseMvcExecutor = Executors.newSingleThreadExecutor();
+        SseEmitter sseEmitter = sseEmitterMap.get(userId);
+        sseMvcExecutor.execute(() -> {
+            try {
+                SseEmitter.SseEventBuilder event = SseEmitter.event()
+                        .data(message)
+                        .id(UUID.randomUUID().toString())
+                        .name("sse event - mvc -> " + LocalTime.now().toString());
+                sseEmitter.send(event);
+            } catch (Exception e) {
+                log.error(format("Unable to send notifications to %s", UserContext.getUsername()));
+                sseEmitter.completeWithError(e);
+            }
+        });
+    }
 }

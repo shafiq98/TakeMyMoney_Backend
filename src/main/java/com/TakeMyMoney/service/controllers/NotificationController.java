@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.mvc.method.annotation.SseEmitter;
 
 import static java.lang.String.format;
 
@@ -32,6 +33,11 @@ public class NotificationController {
     public ResponseEntity<String> unsubscribe() {
         messageService.unsubscribe();
         return ResponseEntity.ok(format("%s has unsubscribed to notifications", UserContext.getUsername()));
+    }
+
+    @PostMapping
+    public ResponseEntity<SseEmitter> emitter() {
+        return ResponseEntity.ok(messageService.subscribe());
     }
 
     @GetMapping
