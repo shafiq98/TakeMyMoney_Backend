@@ -1,32 +1,13 @@
 {
 	"info": {
-		"_postman_id": "1fd15120-87e8-469a-adeb-ed80af84b347",
-		"name": "TakeMyMoney",
+		"_postman_id": "86bdcfda-d8a9-4e92-b1ba-d972b4179bbb",
+		"name": "TakeMyMoney Master",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [
 		{
 			"name": "Local Instance",
 			"item": [
-				{
-					"name": "Initialize",
-					"request": {
-						"method": "POST",
-						"header": [],
-						"url": {
-							"raw": "{{LOCAL_url}}/api/v1/initialize",
-							"host": [
-								"{{LOCAL_url}}"
-							],
-							"path": [
-								"api",
-								"v1",
-								"initialize"
-							]
-						}
-					},
-					"response": []
-				},
 				{
 					"name": "Login (Receiver)",
 					"event": [
@@ -149,7 +130,41 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"token\" : \"{{addressToken}}\",\n    \"value\" : 150.00\n}",
+							"raw": "{\n    \"token\" : \"{{addressToken}}\",\n    \"value\" : 10.00\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{LOCAL_url}}/api/v1/transactions",
+							"host": [
+								"{{LOCAL_url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"transactions"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Transaction Bad Request",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{jwtToken}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"token\" : \"{{addressToken}}\",\n    \"value\" : 100000.00\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -311,38 +326,55 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "Bad Address Request",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var data = JSON.parse(responseBody)",
+									"postman.setEnvironmentVariable(\"addressToken\", data.addressToken)"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Random String",
+								"type": "text"
+							},
+							{
+								"key": "",
+								"value": "",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"url": {
+							"raw": "{{LOCAL_url}}/api/v1/address",
+							"host": [
+								"{{LOCAL_url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"address"
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		},
 		{
 			"name": "AliBaba",
 			"item": [
-				{
-					"name": "WhoAmI",
-					"request": {
-						"method": "GET",
-						"header": [
-							{
-								"key": "Authorization",
-								"value": "Bearer {{jwtToken}}",
-								"type": "text"
-							}
-						],
-						"url": {
-							"raw": "{{ALIBABA_url}}/api/v1/auth/whoami",
-							"host": [
-								"{{ALIBABA_url}}"
-							],
-							"path": [
-								"api",
-								"v1",
-								"auth",
-								"whoami"
-							]
-						}
-					},
-					"response": []
-				},
 				{
 					"name": "Login (Receiver)",
 					"event": [
@@ -465,7 +497,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"token\" : \"{{addressToken}}\",\n    \"value\" : 150.00\n}",
+							"raw": "{\n    \"token\" : \"{{addressToken}}\",\n    \"value\" : 10.00\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -513,6 +545,32 @@
 								"v1",
 								"users",
 								"allUsers"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "WhoAmI",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{jwtToken}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{ALIBABA_url}}/api/v1/auth/whoami",
+							"host": [
+								"{{ALIBABA_url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"auth",
+								"whoami"
 							]
 						}
 					},
