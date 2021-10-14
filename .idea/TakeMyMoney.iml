@@ -13,7 +13,9 @@
     <facet type="jpa" name="JPA">
       <configuration>
         <setting name="validation-enabled" value="true" />
-        <datasource-mapping />
+        <datasource-mapping>
+          <factory-entry name="TakeMyMoney" />
+        </datasource-mapping>
         <naming-strategy-map />
       </configuration>
     </facet>
@@ -97,5 +99,33 @@
     <orderEntry type="library" name="Maven: com.fasterxml.jackson.core:jackson-databind:2.12.5" level="project" />
     <orderEntry type="library" name="Maven: com.fasterxml.jackson.core:jackson-annotations:2.12.5" level="project" />
     <orderEntry type="library" name="Maven: com.fasterxml.jackson.core:jackson-core:2.12.5" level="project" />
+    <orderEntry type="library" name="Maven: nl.martijndwars:web-push:5.1.1" level="project" />
+    <orderEntry type="library" name="Maven: com.beust:jcommander:1.78" level="project" />
+    <orderEntry type="library" name="Maven: org.apache.httpcomponents:httpasyncclient:4.1.4" level="project" />
+    <orderEntry type="library" name="Maven: org.apache.httpcomponents:httpcore:4.4.14" level="project" />
+    <orderEntry type="library" name="Maven: org.apache.httpcomponents:httpcore-nio:4.4.14" level="project" />
+    <orderEntry type="library" name="Maven: org.apache.httpcomponents:httpclient:4.5.13" level="project" />
+    <orderEntry type="library" name="Maven: commons-codec:commons-codec:1.15" level="project" />
+    <orderEntry type="library" name="Maven: org.asynchttpclient:async-http-client:2.10.4" level="project" />
+    <orderEntry type="library" name="Maven: org.asynchttpclient:async-http-client-netty-utils:2.10.4" level="project" />
+    <orderEntry type="library" name="Maven: io.netty:netty-buffer:4.1.68.Final" level="project" />
+    <orderEntry type="library" name="Maven: io.netty:netty-codec-http:4.1.68.Final" level="project" />
+    <orderEntry type="library" name="Maven: io.netty:netty-common:4.1.68.Final" level="project" />
+    <orderEntry type="library" name="Maven: io.netty:netty-transport:4.1.68.Final" level="project" />
+    <orderEntry type="library" name="Maven: io.netty:netty-codec:4.1.68.Final" level="project" />
+    <orderEntry type="library" name="Maven: io.netty:netty-handler:4.1.68.Final" level="project" />
+    <orderEntry type="library" name="Maven: io.netty:netty-resolver:4.1.68.Final" level="project" />
+    <orderEntry type="library" name="Maven: io.netty:netty-codec-socks:4.1.68.Final" level="project" />
+    <orderEntry type="library" name="Maven: io.netty:netty-handler-proxy:4.1.68.Final" level="project" />
+    <orderEntry type="library" name="Maven: io.netty:netty-transport-native-epoll:linux-x86_64:4.1.68.Final" level="project" />
+    <orderEntry type="library" name="Maven: io.netty:netty-transport-native-unix-common:4.1.68.Final" level="project" />
+    <orderEntry type="library" name="Maven: io.netty:netty-transport-native-kqueue:osx-x86_64:4.1.68.Final" level="project" />
+    <orderEntry type="library" name="Maven: io.netty:netty-resolver-dns:4.1.68.Final" level="project" />
+    <orderEntry type="library" name="Maven: io.netty:netty-codec-dns:4.1.68.Final" level="project" />
+    <orderEntry type="library" name="Maven: org.reactivestreams:reactive-streams:1.0.3" level="project" />
+    <orderEntry type="library" name="Maven: com.typesafe.netty:netty-reactive-streams:2.0.3" level="project" />
+    <orderEntry type="library" name="Maven: com.sun.activation:javax.activation:1.2.0" level="project" />
+    <orderEntry type="library" name="Maven: org.bitbucket.b_c:jose4j:0.7.0" level="project" />
+    <orderEntry type="library" name="Maven: org.bouncycastle:bcprov-jdk15on:1.69" level="project" />
   </component>
 </module>
