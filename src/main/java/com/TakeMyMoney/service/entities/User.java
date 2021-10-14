@@ -4,6 +4,7 @@ import com.TakeMyMoney.service.exceptions.users.InsufficientBalanceException;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -36,7 +37,7 @@ public class User {
     public void withdraw(BigDecimal amount){
 
         if (balance.compareTo(amount) < 0){
-            throw new InsufficientBalanceException(String.format("userID %s has insufficient balance", id.toString()));
+            throw new InsufficientBalanceException(String.format("User %s has insufficient balance", getName()));
         }
         else{
             balance = balance.subtract(amount);

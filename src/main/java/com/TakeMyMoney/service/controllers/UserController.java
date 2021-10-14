@@ -41,7 +41,6 @@ public class UserController {
     }
 
     // NOTE this only returns the name of the user
-    // todo change response type to object
     @PostMapping(path="/name")
     public ResponseEntity<UserResponse> getUserName(@RequestBody AddressRequest addressRequest) {
         Address address = addressService.getAddress(addressRequest.getToken());

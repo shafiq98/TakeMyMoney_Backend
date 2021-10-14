@@ -8,7 +8,6 @@ import org.springframework.http.HttpStatus;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class AddressResponse {
-    private String addressToken;
-    private HttpStatus httpStatus;
+public class BusinessExceptionResponse {
+    private String message;
 }
