@@ -15,11 +15,11 @@ public class SchedulerService {
     private AddressService addressService;
 
     //Use cron instead https://crontab.guru/every-5-minutes
-    @Scheduled(cron = "*/600 * * * * *")
-    public void pinScheduler() {
-        LocalDateTime now = LocalDateTime.now();
-        log.info("[Scheduler] Running at: " + now.toString());
-        addressService.removePin(now);
-    }
+//    @Scheduled(cron = "*/600 * * * * *")
+//    public void pinScheduler() {
+//        LocalDateTime now = LocalDateTime.now();
+//        log.info("[Scheduler] Running at: " + now.toString());
+//        addressService.removePin(now);
+//    }
 
 }

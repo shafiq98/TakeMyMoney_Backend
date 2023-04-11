@@ -2,7 +2,6 @@ C:\Users\pcadmin\Documents\CodingProjects\Kotlin\TakeMyMoney_Backend\src\main\ja
 C:\Users\pcadmin\Documents\CodingProjects\Kotlin\TakeMyMoney_Backend\src\main\java\com\TakeMyMoney\service\controllers\NotificationController.java
 C:\Users\pcadmin\Documents\CodingProjects\Kotlin\TakeMyMoney_Backend\src\main\java\com\TakeMyMoney\service\controllers\UserController.java
 C:\Users\pcadmin\Documents\CodingProjects\Kotlin\TakeMyMoney_Backend\src\main\java\com\TakeMyMoney\service\exceptions\addresses\AddressHasExpiredException.java
-C:\Users\pcadmin\Documents\CodingProjects\Kotlin\TakeMyMoney_Backend\src\main\java\com\TakeMyMoney\service\services\CryptoService.java
 C:\Users\pcadmin\Documents\CodingProjects\Kotlin\TakeMyMoney_Backend\src\main\java\com\TakeMyMoney\service\controllers\InitializationController.java
 C:\Users\pcadmin\Documents\CodingProjects\Kotlin\TakeMyMoney_Backend\src\main\java\com\TakeMyMoney\service\exceptions\BusinessExceptions.java
 C:\Users\pcadmin\Documents\CodingProjects\Kotlin\TakeMyMoney_Backend\src\main\java\com\TakeMyMoney\service\controllers\requests\UnsubscribeRequest.java
@@ -18,6 +17,7 @@ C:\Users\pcadmin\Documents\CodingProjects\Kotlin\TakeMyMoney_Backend\src\main\ja
 C:\Users\pcadmin\Documents\CodingProjects\Kotlin\TakeMyMoney_Backend\src\main\java\com\TakeMyMoney\service\exceptions\JwtTokenException.java
 C:\Users\pcadmin\Documents\CodingProjects\Kotlin\TakeMyMoney_Backend\src\main\java\com\TakeMyMoney\service\controllers\authentication\JwtTokenProvider.java
 C:\Users\pcadmin\Documents\CodingProjects\Kotlin\TakeMyMoney_Backend\src\main\java\com\TakeMyMoney\service\entities\Address.java
+C:\Users\pcadmin\Documents\CodingProjects\Kotlin\TakeMyMoney_Backend\src\main\java\com\TakeMyMoney\service\controllers\responses\BusinessExceptionResponse.java
 C:\Users\pcadmin\Documents\CodingProjects\Kotlin\TakeMyMoney_Backend\src\main\java\com\TakeMyMoney\service\services\MessageService.java
 C:\Users\pcadmin\Documents\CodingProjects\Kotlin\TakeMyMoney_Backend\src\main\java\com\TakeMyMoney\service\exceptions\addresses\EmptyAddressListException.java
 C:\Users\pcadmin\Documents\CodingProjects\Kotlin\TakeMyMoney_Backend\src\main\java\com\TakeMyMoney\service\repositories\PinRepository.java
@@ -32,6 +32,7 @@ C:\Users\pcadmin\Documents\CodingProjects\Kotlin\TakeMyMoney_Backend\src\main\ja
 C:\Users\pcadmin\Documents\CodingProjects\Kotlin\TakeMyMoney_Backend\src\main\java\com\TakeMyMoney\service\repositories\UserRepository.java
 C:\Users\pcadmin\Documents\CodingProjects\Kotlin\TakeMyMoney_Backend\src\main\java\com\TakeMyMoney\service\controllers\requests\SubscriptionRequest.java
 C:\Users\pcadmin\Documents\CodingProjects\Kotlin\TakeMyMoney_Backend\src\main\java\com\TakeMyMoney\service\controllers\responses\UserResponse.java
+C:\Users\pcadmin\Documents\CodingProjects\Kotlin\TakeMyMoney_Backend\src\main\java\com\TakeMyMoney\service\exceptions\ControllerAdvisor.java
 C:\Users\pcadmin\Documents\CodingProjects\Kotlin\TakeMyMoney_Backend\src\main\java\com\TakeMyMoney\service\entities\Transaction.java
 C:\Users\pcadmin\Documents\CodingProjects\Kotlin\TakeMyMoney_Backend\src\main\java\com\TakeMyMoney\service\ServiceApplication.java
 C:\Users\pcadmin\Documents\CodingProjects\Kotlin\TakeMyMoney_Backend\src\main\java\com\TakeMyMoney\service\services\InitializerService.java

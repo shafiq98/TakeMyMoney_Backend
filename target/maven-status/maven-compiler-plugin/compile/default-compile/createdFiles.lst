@@ -8,7 +8,7 @@ com\TakeMyMoney\service\entities\User$UserBuilder.class
 com\TakeMyMoney\service\controllers\AddressController.class
 com\TakeMyMoney\service\exceptions\addresses\AddressHasExpiredException.class
 com\TakeMyMoney\service\filters\JwtTokenAuthenticationFilter.class
-com\TakeMyMoney\service\services\CryptoService.class
+com\TakeMyMoney\service\controllers\responses\BusinessExceptionResponse.class
 com\TakeMyMoney\service\controllers\authentication\UserContext.class
 com\TakeMyMoney\service\controllers\NotificationController.class
 com\TakeMyMoney\service\exceptions\transactions\InvalidAmountException.class
@@ -29,6 +29,7 @@ com\TakeMyMoney\service\services\TransactionService.class
 com\TakeMyMoney\service\controllers\requests\SubscriptionRequest.class
 com\TakeMyMoney\service\exceptions\users\InsufficientBalanceException.class
 com\TakeMyMoney\service\controllers\responses\AddressResponse.class
+com\TakeMyMoney\service\exceptions\ControllerAdvisor.class
 com\TakeMyMoney\service\exceptions\JwtTokenException.class
 com\TakeMyMoney\service\entities\Transaction$TransactionBuilder.class
 com\TakeMyMoney\service\controllers\InitializationController.class
